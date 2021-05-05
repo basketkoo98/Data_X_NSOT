@@ -16,4 +16,4 @@ There are two files for the modelling, one in R and one in Python. Users can dow
 
 Our Python and R modeling files are used to find predicted salary of NBA players in the future and this values are automatically displayed on our Streamlit Dashboard, since all the codes interacts without any crashing and successfully updates the player data we provide. 
 
-We are currently waiting for Stramlit's authorization for posting our GUI dashboard and will be updated within a week.
+We are currently waiting for Streamlit's authorization for posting our GUI dashboard and will be updated within a week.
