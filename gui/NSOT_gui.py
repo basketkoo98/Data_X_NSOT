@@ -48,16 +48,12 @@ selected_player_display = st.sidebar.selectbox('Players', filteredNBA.index.map(
 selected_player = selected_player_display + " " + str(selected_year)
 
 
-
-
 # Adding a column sidebars so you can look at graphs of your choice 
 st.sidebar.title("Stat Selection")
 st.title(selected_player_display + f" - Season {selected_year}")
 column_selection = filteredNBA.columns
 column_selection = column_selection[4:]
 selected_column = st.sidebar.selectbox(label=str(selected_year)+" stats", options=column_selection)
-max_selected_column = float(filteredNBA[selected_column].max())
-min_selected_column = float(filteredNBA[selected_column].min())
 filterNameNBA = nba[nba.index.str.contains(str(selected_player_display))]
 pCapfiltered = filterNameNBA['pCap']
 
@@ -74,12 +70,10 @@ def pCap_chart(selected_player_display):
     '''
     fig1 = Figure()
     ax = fig1.subplots()
-    print(filterNameNBA)
     pCapfiltered = filterNameNBA[["Season", "pCap"]]   
     pCapfiltered = pCapfiltered.set_index("Season")
     pCapfiltered2 = filterNameNBA[["Season", "Predicted pCap"]]  
     pCapfiltered2 = pCapfiltered2.set_index("Season")
-    print(pCapfiltered)
     sns.lineplot(data=pCapfiltered, ax=ax)
     sns.lineplot(data=pCapfiltered2, ax=ax, palette=["orange"])
     ax.legend() 
@@ -128,7 +122,7 @@ def graph_2021(selected_player_display, selected_column2, tuple, filter2, select
     fgp2 = copy.loc[selected_for_pred][[selected_column2, 'pCap']]
 
     if filter2:
-        fgp = fgp[(copy[selected_filter] >= tuple[0]) & (fgp[selected_filter] <= tuple[1])]
+        fgp = fgp[(copy[selected_filter] >= tuple[0]) & (copy[selected_filter] <= tuple[1])]
 
 
     cluster_number = pred.loc[selected_for_pred]["sort.km.res.cluster."] 
@@ -170,7 +164,7 @@ options = col3.multiselect(
 col3.write("Player Statistics")
 col3.dataframe(filterNameNBA[options])
 
-# Adding graphs
+# Adding graphs & 2021 Stats Selectbox
 row1_1, row1_spacer2, row1_2, row1_spacer3, row1_3 = st.beta_columns(
     (5, 2, 5, 2, 5)
     )
@@ -179,14 +173,14 @@ column_selection2 = pred.columns
 column_selection2 = column_selection2[4:]
 selected_column2 = st.sidebar.selectbox(label="2021 Stats", options=column_selection2)
 
-# Stat Filter
+# Stat Filter & Select Stat Selectbox
 st.sidebar.title("Stat Filter")
-
 selected_filter = st.sidebar.selectbox(label="Select Stat", options=column_selection2)
+
 # Find min and max of certain stats
-max_selected_column2 = float(nba[selected_filter].max())
-min_selected_column2 = float(nba[selected_filter].min())
-values = st.sidebar.slider(selected_filter, min_value=min_selected_column2, max_value=max_selected_column2, value=(min_selected_column2, max_selected_column2))
+max_selected_column = max(float(nba[selected_filter].max()), float(pred[selected_filter].max()))
+min_selected_column = min(float(nba[selected_filter].min()), float(pred[selected_filter].min()))
+values = st.sidebar.slider(selected_filter, min_value=min_selected_column, max_value=max_selected_column, value=(min_selected_column, max_selected_column))
 filter1 = st.sidebar.checkbox(f"Apply filter to {selected_year} Stats")
 
 
@@ -210,13 +204,9 @@ with row1_3:
         st.subheader("Player is retired; no 2021 statistics.")
     
 
-row2_1, row2_spacer2, row2_2, row2_spacer3, row2_3 = st.beta_columns(
-    (5, 2, 5, 2, 5)
-    )
-
 
 # Adding link to definition of statistics
-row3_1, row3_spacer3, row3_2, row3_spacer4, row3_3 = st.beta_columns(
+row2_1, row2_spacer3, row2_2, row2_spacer4, row2_3 = st.beta_columns(
     (5, 2, 5, 2, 5)
     )
 with col2:
@@ -224,11 +214,7 @@ with col2:
     pred_player = pd.Series(pred.index).unique()
     if selected_for_pred in pred_player:
         st.write("2022 Predicted Salary: $" + '{:,.2f}'.format(round(pred.loc[selected_for_pred]["2022 Predicted Salary"])))
-        
-
-
-        
-with row3_1:
+with row2_1:
     st.subheader("Basketball Statistics Reference:")
-with row3_2: 
+with row2_2: 
     st.subheader("https://www.nba.com/stats/help/glossary/")
