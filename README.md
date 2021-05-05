@@ -1,4 +1,4 @@
-# NBA-SalaryOptimization
+# NBA Salary Optimization Tool (NSOT)
 
 The NBA has a salary cap, which is a limit to the total amount of money they're allowed to spend on their players. As a result, it's imperative that every contract given matches the player's value (or potential value). There are countless instances where a "bad" contract (a contract given to a player who's production is much lower than their contract value) has negatively affected the team.
 
