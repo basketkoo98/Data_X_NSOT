@@ -8,7 +8,7 @@ A motivating example is Timofey Mozgov who signed a 4 year, $64 million contract
 
 This project seeks to use machine learning to find how valuable a player currently is. We will use basic and advanced statistics from the years 2000-2020 to predict player salaries in the form of the percentage of cap space they take up (player salary / NBA Salary Cap).  In addition, we decided to create a model for each of the five nba positions to prevent playstyle biases.
 
-Four models were considered and their average R-squared and RMSE are as listed: Lasso Regression (R2 = 0.5968, RMSE = 0.516), Recursive Feature Elimination + Ridge Regression  (R2 = 0.5838, RMSE = 0.0533), Elastic-Net Regression (R2 = 0.5962, RMSE = 0.0517) , and Decision Tree Regression (R2 = 0.5045, RMSE = 0.0578). 
+Four models were considered and their average R-squared and RMSE are as listed: Lasso Regression (R2 = 0.9552, RMSE = 0.0135), Recursive Feature Elimination + Ridge Regression  (R2 = 0.5838, RMSE = 0.0533), Elastic-Net Regression (R2 = 0.5962, RMSE = 0.0517) , and Decision Tree Regression (R2 = 0.5045, RMSE = 0.0578). 
 
 The Lasso Regression model was the most successful and was used to create the final predictions for all players from 2000-2020. In addition, the model was used to predict salaries for the 2022 NBA season (from 2021 NBA data). All the predicted values were gathered and appended to the original dataset. A k-means clustering algorithm was used on the players from the 2021 NBA season to further split players into groups based on their style of play. These clusters allow us to visualize the most over or undervalued of each playstyle. This allows us to see which players can provide the most value in comparison to their salary.
 
