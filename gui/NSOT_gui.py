@@ -162,7 +162,7 @@ options = col3.multiselect(
     list(column_selection),
     ["Games Played (G)", "2 Pointers Made (2PM)", "3 Points Made (3PM)"])
 col3.write("Player Statistics")
-col3.dataframe(filterNameNBA[options])
+
 
 # Adding graphs & 2021 Stats Selectbox
 row1_1, row1_spacer2, row1_2, row1_spacer3, row1_3 = st.beta_columns(
