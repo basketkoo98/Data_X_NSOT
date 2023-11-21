@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import warnings
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import Ridg
+from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
 from numpy import mean
 from numpy import std
